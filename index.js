@@ -19,8 +19,12 @@ app.get('/',(req,res) =>{
 /////////////////////////////////////
 app.post('/api/courses',(req,res)=>{
 
+const schema = Joi.object({
+    name: Joi.string().min(3).required()
+}); 
+const result =schema.validate(req.body);
+console.log(result);
 
-    
 const course ={
 id:courses.length+1,
 name: req.body.name
@@ -28,6 +32,7 @@ name: req.body.name
 
 };
 courses.push(course);
+res.send(course);
 
 
 });
